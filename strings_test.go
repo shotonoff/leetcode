@@ -12,3 +12,14 @@ func TestNumDecodings(t *testing.T) {
 	//assert.Equal(t, 0, numDecodings(""))
 	//assert.Equal(t, 0, numDecodings("0"))
 }
+
+func TestRomanToInt(t *testing.T) {
+	assert.Equal(t, 0, romanToInt(""))
+	assert.Equal(t, 3, romanToInt("III"))
+	assert.Equal(t, 4, romanToInt("IV"))
+	assert.Equal(t, 9, romanToInt("IX"))
+	assert.Equal(t, 58, romanToInt("LVIII"))
+	assert.Equal(t, 1994, romanToInt("MCMXCIV"))
+	assert.Equal(t, 1994, romanToInt("XXXIX"))
+	assert.Equal(t, 1994, romanToInt("CCXLVI"))
+}
