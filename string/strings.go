@@ -1,4 +1,4 @@
-package leetcode
+package string
 
 // https://leetcode.com/problems/decode-ways/
 // 91. Decode Ways
@@ -70,4 +70,42 @@ func romanToInt(s string) int {
 	}
 
 	return res
+}
+
+// https://leetcode.com/problems/two-sum/
+// 1. Two Sum
+func twoSum(nums []int, target int) []int {
+	ht := make(map[int]int)
+
+	for i, n := range nums {
+		m := target - n
+		if j, ok := ht[m]; ok == true {
+			return []int{j, i}
+		}
+
+		ht[n] = i
+	}
+
+	return nil
+}
+
+// https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+// 167. Two Sum II - Input array is sorted
+func twoSum2(nums []int, target int) []int {
+	var i, j, sum = 0, len(nums) - 1, 0
+
+	for i < j {
+		sum = nums[i] + nums[j]
+		if sum == target {
+			return []int{i + 1, j + 1}
+		}
+
+		if sum > target {
+			j--
+		} else {
+			i++
+		}
+	}
+
+	return nil
 }
