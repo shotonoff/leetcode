@@ -33,6 +33,30 @@ func (suite *StringTestSuite) TestRomanToInt() {
 	assert.Equal(suite.T(), 1994, romanToInt("CCXLVI"))
 }
 
+func (suite *StringTestSuite) TestConvert() {
+	assert.Equal(suite.T(), "PAYPALISHIRING", convert("PAYPALISHIRING", 1))
+	assert.Equal(suite.T(), "PYAIHRNAPLSIIG", convert("PAYPALISHIRING", 2))
+	assert.Equal(suite.T(), "PAHNAPLSIIGYIR", convert("PAYPALISHIRING", 3))
+	assert.Equal(suite.T(), "PINALSIGYAHRPI", convert("PAYPALISHIRING", 4))
+	assert.Equal(suite.T(), "PHASIYIRPLIGAN", convert("PAYPALISHIRING", 5))
+}
+
+func (suite *StringTestSuite) TestLongestPalindrome() {
+	assert.Equal(suite.T(), "a", longestPalindrome("a"))
+	assert.Equal(suite.T(), "a", longestPalindrome("ab"))
+	assert.Equal(suite.T(), "aa", longestPalindrome("aa"))
+	assert.Equal(suite.T(), "aa", longestPalindrome("aab"))
+	assert.Equal(suite.T(), "aa", longestPalindrome("baa"))
+	assert.Equal(suite.T(), "bab", longestPalindrome("babad"))
+	assert.Equal(suite.T(), "bb", longestPalindrome("cbbd"))
+	assert.Equal(suite.T(), "asdfdsa", longestPalindrome("asdfdsa"))
+	assert.Equal(suite.T(), "asdfdsa", longestPalindrome("dasdfdsal"))
+	assert.Equal(suite.T(), "ff", longestPalindrome("asdff"))
+	assert.Equal(suite.T(), "ddddddd", longestPalindrome("asdffddddddd"))
+	assert.Equal(suite.T(), "dddddddd", longestPalindrome("ddddddddasdffddddddd"))
+	assert.Equal(suite.T(), "a", longestPalindrome("asdfghjkl"))
+}
+
 func TestS3ClientTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }

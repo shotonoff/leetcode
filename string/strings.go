@@ -1,5 +1,9 @@
 package string
 
+import (
+	"bytes"
+)
+
 // https://leetcode.com/problems/decode-ways/
 // 91. Decode Ways
 func numDecodings(s string) int {
@@ -70,4 +74,90 @@ func romanToInt(s string) int {
 	}
 
 	return res
+}
+
+// https://leetcode.com/problems/longest-palindromic-substring/
+// 5. Longest Palindromic Substring
+func longestPalindrome(s string) string {
+	l := len(s)
+	if l == 0 {
+		return ""
+	}
+
+	var (
+		rs, r   string = "", s[0:1]
+		rc, rsc int
+	)
+
+	for i := 0; i < l-1; i++ {
+		rs, rsc = helperLongestPalindrome(s, i, i, l)
+
+		if rsc > rc {
+			r, rc = rs, rsc
+		}
+
+		rs, rsc = helperLongestPalindrome(s, i, i+1, l)
+
+		if rsc > rc {
+			r, rc = rs, rsc
+		}
+	}
+
+	return r
+}
+
+func helperLongestPalindrome(s string, i, j, l int) (string, int) {
+	for i > 0 && j < l-1 && s[i] == s[j] {
+		i--
+		j++
+	}
+
+	if s[i] != s[j] {
+		i++
+		j--
+	}
+
+	return s[i : j+1], j - i + 1
+}
+
+// https://leetcode.com/problems/zigzag-conversion/
+// 6. ZigZag Conversion
+//
+// P   A   H   N
+// A P L S I I G
+// Y   I   R
+//
+// P     I    N
+// A   L S  I G
+// Y A   H R
+// P     I
+func convert(s string, numRows int) string {
+	l := len(s)
+	d := numRows
+
+	if d > 1 {
+		d = numRows*2 - 2
+	}
+
+	var p, level int
+	buf := bytes.NewBuffer([]byte{})
+
+	for i := 0; i < l; i++ {
+		if p >= l {
+			level++
+			p = level
+		}
+
+		buf.WriteByte(s[p])
+
+		td := d - (level * 2)
+		if (p+td) < l && level > 0 && level < (numRows-1) {
+			buf.WriteByte(s[p+td])
+			i++
+		}
+
+		p += d
+	}
+
+	return buf.String()
 }
