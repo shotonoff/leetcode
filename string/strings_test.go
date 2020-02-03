@@ -33,22 +33,6 @@ func (suite *StringTestSuite) TestRomanToInt() {
 	assert.Equal(suite.T(), 1994, romanToInt("CCXLVI"))
 }
 
-func (suite *StringTestSuite) TestTwoSum() {
-	assert.Equal(suite.T(), []int{0, 1}, twoSum([]int{2, 7, 11, 15}, 9))
-	assert.Equal(suite.T(), []int(nil), twoSum([]int{}, 9))
-	assert.Equal(suite.T(), []int{0, 3}, twoSum([]int{2, 23, 11, 7}, 9))
-	assert.Equal(suite.T(), []int{1, 2}, twoSum([]int{3, 2, 4}, 6))
-	assert.Equal(suite.T(), []int{0, 1}, twoSum([]int{3, 3}, 6))
-}
-
-func (suite *StringTestSuite) TestTwoSum2() {
-	assert.Equal(suite.T(), []int{1, 2}, twoSum2([]int{2, 7, 11, 15}, 9))
-	assert.Equal(suite.T(), []int{2, 4}, twoSum2([]int{2, 7, 11, 23}, 30))
-	assert.Equal(suite.T(), []int{4, 7}, twoSum2([]int{2, 3, 4, 5, 6, 7, 8, 100}, 13))
-	assert.Equal(suite.T(), []int{1, 2}, twoSum2([]int{3, 3}, 6))
-	assert.Equal(suite.T(), []int{3, 4}, twoSum2([]int{1, 2, 3, 3, 7, 8, 9}, 6))
-}
-
 func TestS3ClientTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }
