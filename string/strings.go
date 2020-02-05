@@ -4,6 +4,13 @@ import (
 	"bytes"
 )
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 // https://leetcode.com/problems/decode-ways/
 // 91. Decode Ways
 func numDecodings(s string) int {
@@ -160,4 +167,88 @@ func convert(s string, numRows int) string {
 	}
 
 	return buf.String()
+}
+
+// https://leetcode.com/problems/palindromic-substrings/
+// 647. Palindromic Substrings
+func countSubstrings(s string) int {
+	l := len(s)
+	if l == 0 {
+		return 0
+	}
+
+	var r = 0
+
+	for i := 0; i < l; i++ {
+		r += helperCountSubstrings(s, i, i, l)
+		r += helperCountSubstrings(s, i, i+1, l)
+	}
+
+	return r
+}
+
+func helperCountSubstrings(s string, i, j, l int) (cnt int) {
+	for i >= 0 && j < l && s[i] == s[j] {
+		i--
+		j++
+		cnt++
+	}
+
+	return
+}
+
+// https://leetcode.com/problems/longest-palindromic-subsequence/
+// 516. Longest Palindromic Subsequence
+func longestPalindromeSubseq(s string) int {
+	totalLen := len(s)
+	if totalLen == 0 {
+		return 0
+	}
+
+	dp := make([][]int, totalLen+1)
+	for i := 0; i < totalLen+1; i++ {
+		dp[i] = make([]int, totalLen)
+		if i < totalLen {
+			dp[i][i] = 1
+		}
+	}
+
+	for partialLen := 1; partialLen < totalLen; partialLen++ {
+		for i := 0; i < totalLen-partialLen; i++ {
+			j := i + partialLen
+
+			if s[i] == s[j] {
+				dp[i][j] = dp[i+1][j-1] + 2
+			} else {
+				dp[i][j] = max(dp[i][j-1], dp[i+1][j])
+			}
+		}
+	}
+
+	return dp[0][totalLen-1]
+}
+
+// https://leetcode.com/problems/longest-common-subsequence
+// 1143. Longest Common Subsequence
+func longestCommonSubsequence(text1, text2 string) int {
+	l1 := len(text1)
+	l2 := len(text2)
+
+	dp := make([][]int, l1+1)
+
+	for i := 0; i < l1+1; i++ {
+		dp[i] = make([]int, l2+1)
+	}
+
+	for i := 1; i <= l1; i++ {
+		for j := 1; j <= l2; j++ {
+			if text1[i-1] == text2[j-1] {
+				dp[i][j] = max(dp[i-1][j-1]+1, dp[i][j-1])
+			} else {
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+			}
+		}
+	}
+
+	return dp[l1][l2]
 }

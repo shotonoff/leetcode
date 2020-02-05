@@ -57,6 +57,38 @@ func (suite *StringTestSuite) TestLongestPalindrome() {
 	assert.Equal(suite.T(), "a", longestPalindrome("asdfghjkl"))
 }
 
+func (suite *StringTestSuite) TestCountSubstrings() {
+	assert.Equal(suite.T(), 1, countSubstrings("a"))
+	assert.Equal(suite.T(), 2, countSubstrings("ab"))
+	assert.Equal(suite.T(), 3, countSubstrings("aa"))
+	assert.Equal(suite.T(), 3, countSubstrings("abc"))
+	assert.Equal(suite.T(), 5, countSubstrings("abcb"))
+	assert.Equal(suite.T(), 6, countSubstrings("aaa"))
+}
+
+func (suite *StringTestSuite) TestLongestPalindromeSubseq() {
+	assert.Equal(suite.T(), 4, longestPalindromeSubseq("bbbab"))
+	assert.Equal(suite.T(), 4, longestPalindromeSubseq("bbbsdfb"))
+	assert.Equal(suite.T(), 5, longestPalindromeSubseq("bbbaaab"))
+	assert.Equal(suite.T(), 2, longestPalindromeSubseq("cbbd"))
+	assert.Equal(suite.T(), 2, longestPalindromeSubseq("aab"))
+	assert.Equal(suite.T(), 1, longestPalindromeSubseq("a"))
+}
+
+func (suite *StringTestSuite) TestLongestCommonSubsequence() {
+	assert.Equal(suite.T(), 6, longestCommonSubsequence("asddfghjkl", "dqwahyrdopfqqgrtkwel"))
+	assert.Equal(suite.T(), 2, longestCommonSubsequence("addghl", "dahrdo"))
+
+	assert.Equal(suite.T(), 2, longestCommonSubsequence("asd", "adqaydad"))
+	assert.Equal(suite.T(), 3, longestCommonSubsequence("abcde", "ace"))
+	assert.Equal(suite.T(), 3, longestCommonSubsequence("abc", "abc"))
+	assert.Equal(suite.T(), 0, longestCommonSubsequence("abc", "ghj"))
+	assert.Equal(suite.T(), 4, longestCommonSubsequence("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
+	assert.Equal(suite.T(), 3, longestCommonSubsequence("abcaf", "bkamcnf"))
+	assert.Equal(suite.T(), 1, longestCommonSubsequence("abcaf", "a"))
+	assert.Equal(suite.T(), 1, longestCommonSubsequence("a", "abcaf"))
+}
+
 func TestS3ClientTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }
