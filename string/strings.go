@@ -252,3 +252,52 @@ func longestCommonSubsequence(text1, text2 string) int {
 
 	return dp[l1][l2]
 }
+
+// https://leetcode.com/problems/length-of-last-word/
+// 58. Length of Last Word
+func lengthOfLastWord(s string) int {
+	var i, j int
+	l := len(s)
+
+	for j = l - 1; j >= 0 && s[j] == ' '; j-- {
+	}
+
+	for i = j; i >= 0 && s[i] != ' '; i-- {
+	}
+
+	return j - i
+}
+
+func reverseVowels(s string) string {
+	l := len(s)
+
+	if l == 1 || l == 0 {
+		return s
+	}
+
+	var i, j = 0, len(s) - 1
+	r := make([]byte, len(s))
+
+	for ; i <= j; i, j = i+1, j-1 {
+		for ; i < j && !isVowel(s[i]); i++ {
+			r[i] = s[i]
+		}
+
+		for ; j > i && !isVowel(s[j]); j-- {
+			r[j] = s[j]
+		}
+
+		r[i], r[j] = s[j], s[i]
+	}
+
+	return string(r)
+}
+
+func isVowel(ch byte) bool {
+	if ch == 'e' || ch == 'i' || ch == 'u' || ch == 'o' || ch == 'a' ||
+		ch == 'E' || ch == 'I' || ch == 'U' || ch == 'O' || ch == 'A' {
+		return true
+	}
+
+	return false
+}

@@ -89,6 +89,31 @@ func (suite *StringTestSuite) TestLongestCommonSubsequence() {
 	assert.Equal(suite.T(), 1, longestCommonSubsequence("a", "abcaf"))
 }
 
+func (suite *StringTestSuite) TestLengthOfLastWord() {
+	assert.Equal(suite.T(), 4, lengthOfLastWord("asd asd qazs"))
+	assert.Equal(suite.T(), 4, lengthOfLastWord("asd asd qazs   "))
+	assert.Equal(suite.T(), 4, lengthOfLastWord("   asd asd qazs  "))
+	assert.Equal(suite.T(), 2, lengthOfLastWord("qa zs  "))
+	assert.Equal(suite.T(), 2, lengthOfLastWord("zs  "))
+	assert.Equal(suite.T(), 2, lengthOfLastWord(" a s d f g g s_"))
+	assert.Equal(suite.T(), 0, lengthOfLastWord("  "))
+	assert.Equal(suite.T(), 5, lengthOfLastWord("Hello World"))
+}
+
+func (suite *StringTestSuite) TestReverseVowels() {
+	assert.Equal(suite.T(), "holle", reverseVowels("hello"))
+	assert.Equal(suite.T(), "leotcede", reverseVowels("leetcode"))
+	assert.Equal(suite.T(), "", reverseVowels(""))
+	assert.Equal(suite.T(), "a", reverseVowels("a"))
+	assert.Equal(suite.T(), "ua", reverseVowels("au"))
+	assert.Equal(suite.T(), "aA", reverseVowels("Aa"))
+	assert.Equal(suite.T(), "aA", reverseVowels("Aa"))
+	assert.Equal(suite.T(), "a a", reverseVowels("a a"))
+	assert.Equal(suite.T(), "ab ba", reverseVowels("ab ba"))
+	assert.Equal(suite.T(), "abA aba", reverseVowels("aba Aba"))
+	assert.Equal(suite.T(), "abA  aba", reverseVowels("aba  Aba"))
+}
+
 func TestS3ClientTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }
