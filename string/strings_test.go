@@ -114,6 +114,28 @@ func (suite *StringTestSuite) TestReverseVowels() {
 	assert.Equal(suite.T(), "abA  aba", reverseVowels("aba  Aba"))
 }
 
+func (suite *StringTestSuite) TestReverseString() {
+	var b []byte
+	b = []byte{'h', 'e', 'l', 'l', 'o'}
+	reverseString(b)
+	assert.Equal(suite.T(), []byte{'o', 'l', 'l', 'e', 'h'}, b)
+
+	b = []byte{'H', 'a', 'n', 'n', 'a', 'h'}
+	reverseString(b)
+	assert.Equal(suite.T(), []byte{'h', 'a', 'n', 'n', 'a', 'H'}, b)
+
+	b = []byte{}
+	reverseString(b)
+	assert.Equal(suite.T(), []byte{}, b)
+}
+
+func (suite *StringTestSuite) TestReverseStr() {
+	assert.Equal(suite.T(), "bacdfeg", reverseStr("abcdefg", 2))
+	assert.Equal(suite.T(), "cbadefg", reverseStr("abcdefg", 3))
+	assert.Equal(suite.T(), "gfedcba", reverseStr("abcdefg", 10))
+	assert.Equal(suite.T(), "", reverseStr("", 10))
+}
+
 func TestS3ClientTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }

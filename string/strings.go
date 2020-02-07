@@ -301,3 +301,33 @@ func isVowel(ch byte) bool {
 
 	return false
 }
+
+func reverseString(s []byte) {
+	var i, j = 0, len(s) - 1
+
+	for ; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+}
+
+// https://leetcode.com/problems/reverse-string-ii/submissions/
+// 541. Reverse String II
+func reverseStr(s string, k int) string {
+	b := []byte(s)
+
+	l := len(s)
+
+	for i := 0; i < l; i = i + 2*k {
+		j := i + k - 1
+
+		if j >= l {
+			j = l - 1
+		}
+
+		for l, r := i, j; l < r; l, r = l+1, r-1 {
+			b[l], b[r] = b[r], b[l]
+		}
+	}
+
+	return string(b)
+}
