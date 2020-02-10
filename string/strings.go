@@ -2,6 +2,9 @@ package string
 
 import (
 	"bytes"
+	"fmt"
+	"sort"
+	"strings"
 )
 
 func max(a, b int) int {
@@ -330,4 +333,100 @@ func reverseStr(s string, k int) string {
 	}
 
 	return string(b)
+}
+
+// https://leetcode.com/problems/reverse-only-letters/
+// 917. Reverse Only Letters
+func reverseOnlyLetters(s string) string {
+	b := []byte(s)
+	var i, j = 0, len(s) - 1
+
+	for ; i <= j; i, j = i+1, j-1 {
+		for ; i < j && !isAlphabet(b[i]); i++ {
+		}
+
+		for ; i < j && !isAlphabet(b[j]); j-- {
+		}
+
+		b[i], b[j] = b[j], b[i]
+	}
+
+	return string(b)
+}
+
+func isAlphabet(b byte) bool {
+	return (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z')
+}
+
+// https://leetcode.com/problems/repeated-substring-pattern/
+// 459. Repeated Substring Pattern
+func repeatedSubstringPattern(s string) bool {
+	l := len(s)
+
+	if l <= 1 {
+		return false
+	}
+
+	for i := 1; i <= l/2; i++ {
+		if l%i == 0 && helperRepeatedSubstringPattern(i, l, s) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func helperRepeatedSubstringPattern(j, l int, s string) bool {
+	for i := 0; j < l; i, j = i+1, j+1 {
+		if s[i] != s[j] {
+			return false
+		}
+	}
+
+	return true
+}
+
+// https://leetcode.com/problems/custom-sort-string/
+// 791. Custom Sort String
+func customSortString(s string, T string) string {
+	ht := make([]int, 26)
+	l := len(s)
+	for i := 0; i < 26; i++ {
+		ht[i] = 99
+	}
+	for i := 0; i < l; i++ {
+		ht[s[i]-'a'] = i
+	}
+
+	res := []byte(T)
+	sort.Slice(res, func(i, j int) bool {
+		return ht[res[i]-'a'] < ht[res[j]-'a']
+	})
+
+	return string(res)
+}
+
+// https://leetcode.com/problems/simplify-path/
+// 71. Simplify Path
+func simplifyPath(path string) string {
+	l := len(path)
+	var j int
+	var st []string
+	var part string
+
+	for i := 0; i < l; i = j + 1 {
+		for j = i; j < l && path[j] != '/'; j++ {
+		}
+
+		part = path[i:j]
+		if part == ".." {
+			if len(st) > 0 {
+				st = st[0 : len(st)-1]
+			}
+		} else if part != "." && part != "" {
+			st = append(st, path[i:j])
+		}
+	}
+
+	return fmt.Sprintf("/%s", strings.Join(st, "/"))
 }

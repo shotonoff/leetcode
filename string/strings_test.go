@@ -136,6 +136,44 @@ func (suite *StringTestSuite) TestReverseStr() {
 	assert.Equal(suite.T(), "", reverseStr("", 10))
 }
 
-func TestS3ClientTestSuite(t *testing.T) {
+func (suite *StringTestSuite) TestReverseOnlyLetters() {
+	assert.Equal(suite.T(), "dc-ba", reverseOnlyLetters("ab-cd"))
+	assert.Equal(suite.T(), "j-Ih-gfE-dCba", reverseOnlyLetters("a-bC-dEf-ghIj"))
+	assert.Equal(suite.T(), "Qedo1ct-eeLg=ntse-T!", reverseOnlyLetters("Test1ng-Leet=code-Q!"))
+}
+
+func (suite *StringTestSuite) TestRepeatedSubstringPattern() {
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("ab"))
+	assert.Equal(suite.T(), true, repeatedSubstringPattern("abab"))
+	assert.Equal(suite.T(), true, repeatedSubstringPattern("abaaabaa"))
+	assert.Equal(suite.T(), true, repeatedSubstringPattern("ababab"))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern(""))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("a"))
+	assert.Equal(suite.T(), true, repeatedSubstringPattern("abcabcabcabc"))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("abac"))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("aba"))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("abaaabaaa"))
+	assert.Equal(suite.T(), true, repeatedSubstringPattern("bb"))
+	assert.Equal(suite.T(), false, repeatedSubstringPattern("ababa"))
+}
+
+func (suite *StringTestSuite) TestCustomSortString() {
+	assert.Equal(suite.T(), "cbad", customSortString("cba", "abcd"))
+	assert.Equal(suite.T(), "ccfbddalwoqwpmpq", customSortString("cfbedia", "cwqpwolbcdqdpmfa"))
+	assert.Equal(suite.T(), "", customSortString("", ""))
+}
+
+func (suite *StringTestSuite) TestSimplifyPath() {
+	assert.Equal(suite.T(), "/home", simplifyPath("/home/"))
+	assert.Equal(suite.T(), "/home", simplifyPath("/home//////////"))
+	assert.Equal(suite.T(), "/a/b/c/d/e/f/g", simplifyPath("/a/b/c/d///e/f/./././././././g/../g/../g/../g/"))
+	assert.Equal(suite.T(), "/", simplifyPath("/../"))
+	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../../c/"))
+	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..//c/"))
+	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..////c/"))
+	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..////c///../../../c//"))
+}
+
+func TestStringTestSuite(t *testing.T) {
 	suite.Run(t, new(StringTestSuite))
 }
