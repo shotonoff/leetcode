@@ -138,3 +138,42 @@ func helperThreeSumClosest(nums []int, t, l, r int) int {
 
 	return m
 }
+
+// https://leetcode.com/problems/merge-intervals/
+// 56. Merge Intervals
+func merge(in [][]int) (res [][]int) {
+	l := len(in)
+	if l <= 1 {
+		return in
+	}
+
+	sort.Slice(in, func(i, j int) bool {
+		return in[i][0] < in[j][0]
+	})
+
+	var n = in[0]
+
+	for i := 1; i < l; i++ {
+		if n[1] >= in[i][1] {
+			continue
+		}
+
+		if n[1] < in[i][1] && n[1] > in[i][0] ||
+			n[1] == in[i][0] {
+			n[1] = Max(n[1], in[i][1])
+		} else {
+			res = append(res, n)
+			n = in[i]
+		}
+	}
+
+	return append(res, n)
+}
+
+func Max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}

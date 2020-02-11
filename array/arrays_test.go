@@ -71,6 +71,49 @@ func (suite *ArrayTestSuite) TestThreeSumClosest() {
 	assert.Equal(suite.T(), 3, helperThreeSumClosest(r, 2, 3, len(r)-1))
 }
 
+func (suite *ArrayTestSuite) TestMerge() {
+	var actual, expected [][]int
+
+	actual = [][]int{}
+	assert.Equal(suite.T(), [][]int{}, merge(actual))
+
+	actual = [][]int{{1, 4}, {1, 4}}
+	expected = [][]int{{1, 4}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 4}, {4, 5}}
+	expected = [][]int{{1, 5}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 3}, {5, 7}}
+	expected = [][]int{{1, 3}, {5, 7}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 3}}
+	expected = [][]int{{1, 3}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}}
+	expected = [][]int{{1, 6}, {8, 10}, {15, 18}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 3}, {2, 6}, {8, 10}, {13, 22}, {15, 18}}
+	expected = [][]int{{1, 6}, {8, 10}, {13, 22}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 11}, {2, 6}, {8, 10}, {13, 22}, {15, 18}}
+	expected = [][]int{{1, 11}, {13, 22}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 2}, {3, 6}, {8, 10}, {13, 14}, {15, 18}}
+	expected = [][]int{{1, 2}, {3, 6}, {8, 10}, {13, 14}, {15, 18}}
+	assert.Equal(suite.T(), expected, merge(actual))
+
+	actual = [][]int{{1, 20}, {2, 6}, {8, 10}, {13, 22}, {15, 18}}
+	expected = [][]int{{1, 22}}
+	assert.Equal(suite.T(), expected, merge(actual))
+}
+
 func TestArrayTestSuite(t *testing.T) {
 	suite.Run(t, new(ArrayTestSuite))
 }
