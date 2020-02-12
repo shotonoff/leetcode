@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+func TestStringTestSuite(t *testing.T) {
+	suite.Run(t, new(StringTestSuite))
+}
+
 type StringTestSuite struct {
 	suite.Suite
 }
@@ -172,8 +176,4 @@ func (suite *StringTestSuite) TestSimplifyPath() {
 	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..//c/"))
 	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..////c/"))
 	assert.Equal(suite.T(), "/c", simplifyPath("/a/./b/../..////c///../../../c//"))
-}
-
-func TestStringTestSuite(t *testing.T) {
-	suite.Run(t, new(StringTestSuite))
 }
