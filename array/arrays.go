@@ -154,16 +154,11 @@ func merge(in [][]int) (res [][]int) {
 	var n = in[0]
 
 	for i := 1; i < l; i++ {
-		if n[1] >= in[i][1] {
-			continue
-		}
-
-		if n[1] < in[i][1] && n[1] > in[i][0] ||
-			n[1] == in[i][0] {
-			n[1] = Max(n[1], in[i][1])
-		} else {
+		if n[1] < in[i][0] {
 			res = append(res, n)
 			n = in[i]
+		} else if n[1] >= in[i][0] {
+			n[1] = Max(n[1], in[i][1])
 		}
 	}
 
