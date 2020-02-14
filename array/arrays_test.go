@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+func TestArrayTestSuite(t *testing.T) {
+	suite.Run(t, new(ArrayTestSuite))
+}
+
 type ArrayTestSuite struct {
 	suite.Suite
 }
@@ -114,6 +118,7 @@ func (suite *ArrayTestSuite) TestMerge() {
 	assert.Equal(suite.T(), expected, merge(actual))
 }
 
-func TestArrayTestSuite(t *testing.T) {
-	suite.Run(t, new(ArrayTestSuite))
+func (suite *ArrayTestSuite) TestMaxSlidingWindow() {
+	assert.Equal(suite.T(), []int{3, 3, 5, 5, 6, 7}, maxSlidingWindow([]int{1, 3, -1, -3, 5, 3, 6, 7}, 3))
+	assert.Equal(suite.T(), []int{3, 3, 10, 10, 10, 6, 7}, maxSlidingWindow([]int{1, 3, -1, -3, 10, 3, 6, 1, 7}, 3))
 }
