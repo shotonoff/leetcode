@@ -177,6 +177,11 @@ func Max(a, b int) int {
 // 239. Sliding Window Maximum
 func maxSlidingWindow(nums []int, k int) []int {
 	var st []int
+
+	if len(nums) <= 1 {
+		return nums
+	}
+
 	s := SlidingWindow{qLimit: k}
 	st = make([]int, len(nums)-k+1)
 

@@ -34,13 +34,6 @@ func (s *SlidingWindow) Push(n int) {
 	s.hLen++
 }
 
-func (s *SlidingWindow) ExtractMax() int {
-	m := s.Max()
-	s.remove(0)
-
-	return m
-}
-
 func (s *SlidingWindow) remove(i int) {
 	s.hLen--
 	s.h[i] = s.h[s.hLen]
@@ -85,7 +78,7 @@ func (s *SlidingWindow) sift(i int) int {
 		return i
 	}
 
-	p := i / 2
+	p := (i - 1) / 2
 
 	if s.h[p].v < s.h[i].v {
 		s.h[p], s.h[i] = s.h[i], s.h[p]
